@@ -1,0 +1,62 @@
+//Include the NodeMCU ESP8266 Library
+#include <ESP8266WiFi.h>
+
+
+//Defining an On Board LED, used for indicators when the process of connecting to a wifi router
+#define ON_Board_LED D5
+
+//Defining LIGHT/Relay Port
+#define LIGHT D4        
+
+//SSID and Password of your WiFi router/hotspot
+const char *ssid = "PankajPC";
+const char *password = "pankaj123";
+
+
+WiFiClient client;
+
+//SETUP
+void setup()
+{
+  Serial.begin(9600);
+  delay(100);
+
+  pinMode(ON_Board_LED, OUTPUT); //On Board LED port Direction output
+  pinMode(LIGHT, OUTPUT);        //LIGHT/Relay port Direction output
+
+  digitalWrite(ON_Board_LED, LOW); //Turn off Led On Board.
+  digitalWrite(LIGHT, LOW);         //Turn off LIGHT/Relay
+
+  //Wait for connection
+  WiFi.begin(ssid, password);
+  Serial.println("");
+  Serial.print("Connecting");
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print(".");
+    //Make the On Board Flashing LED on the process of connecting to the wifi router.
+    digitalWrite(ON_Board_LED, LOW);
+    delay(250);
+    digitalWrite(ON_Board_LED, HIGH);
+    delay(250);
+  }
+  digitalWrite(ON_Board_LED, HIGH); //Turn off the On Board LED when it is connected to the wifi router.
+
+  Serial.println("");
+  Serial.print("Successfully connected to : ");
+  Serial.println(ssid);
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+  Serial.print("Netmask: ");
+  Serial.println(WiFi.subnetMask());
+  Serial.print("Gateway: ");
+  Serial.println(WiFi.gatewayIP());
+  
+  //ThingSpeak.begin(client)
+  ThingSpeak.begin(client);
+}
+
+void loop()
+{
+	digitalWrite(LIGHT, HIGH);
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Security-Policy" content="*">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<title>index</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div>
+		<h1>Control from Anywhere with ThingSpeak</h1>
+		<br>
+		<p>ThingSpeak API Key :
+			<input id="ts-api-key" placeholder="ThingSpeak API Key" value="X6IYN5QJHNB1WHAV" />
+		</p>
+		<p>ThingSpeak Channel ID :
+			<input id="ts-channel-id" placeholder="ThingSpeak Channel ID" value="2045690" />
+		</p>
+		<br>
+		<button type="button" id="light-on" class="buttonON">ON</button>
+		<button type="button" id="light-off" class="buttonOFF">OFF</button>
+		<br>
+	</div>
+	<br>
+	<img id="LightImage" src="./images/led.png">
+	<div>
+		<p>Light Status is : <span id="LIGHTState">Please wait...</span></p>
+	</div>
+	<script src="script.js"></script>
+</body>
+
+</html>
